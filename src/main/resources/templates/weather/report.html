@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>天气预报(github.com/DeweyLiu)</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h3 th:text="${reportModel.title}"></h3>
+        <select class="custom-select" id="selectCityId" th:field="${reportModel}">
+            <option th:each="city : ${reportModel.cityList}"
+                    th:value="${city.cityId}" th:text="${city.cityName}"
+                    th:selected="${city.cityId eq reportModel.cityId}"></option>
+        </select>
+    </div>
+   <!-- <div class="row">
+        <select class="custom-select" id="selectCityId" multiple="multiple" th:field="${reportModel}">
+            <option th:each="city:${reportModel.cityList}" th:value="${city.cityId}" th:text="${city.cityName}"
+                    th:selected="${reportModel.cityList.contains(city.cityId)}"/>
+        </select>
+    </div>-->
+    <div class="row">
+        <h1 class="text-success" th:text="${reportModel.report.city}">${reportModel.report.city}</h1>
+    </div>
+    <div class="row">
+        <p>
+            空气质量指数:<span th:text="${reportModel.report.aqi}"></span>
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            当前温度:<span th:text="${reportModel.report.wendu}"></span>
+        </p>
+    </div>
+    <div class="row">
+        <p>
+            温馨提示:<span th:text="${reportModel.report.ganmao}"></span>
+        </p>
+    </div>
+    <div class="row">
+        <div class="card border-info" th:each="forecast : ${reportModel.report.forecast}">
+            <div class="card-body text-info">
+                <p class="card-text" th:text="${forecast.date}">日期</p>
+                <p class="card-text" th:text="${forecast.type}">天气类型</p>
+                <p class="card-text" th:text="${forecast.high}">最高温度</p>
+                <p class="card-text" th:text="${forecast.low}">最低温度</p>
+                <p class="card-text" th:text="${forecast.fengxiang}">风向</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+<!-- Optional JavaScript -->
+<script type="text/javascript" th:src="@{/js/weather/report.js}"></script>
+</select>
+</body>
+</html>
